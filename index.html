@@ -9,7 +9,32 @@
 </head>
 <body>
     <h1>Flatiron Movie Theater</h1>
-    
+    <div class="upload">
+    <form id="new-film">
+        
+        <label for="title">Title:</label>
+        <input name="title" type="text" id="title"> 
+
+        <label for="runtime">Runtime:</label>
+        <input name="runtime" type="text" id="runtime">
+
+        <label  for="capacity">Capacity:</label>
+        <input name="capacity" type="number" id="capacity">
+
+        <label for="tickets_sold" >Tickets Sold:</label>
+        <input name="tickets_sold" type="number" id="tickets_sold">
+
+        <label for="showtime">Showtime:</label>
+        <input name="showtime" type="time" id="showtime">
+
+        <label for="description">Description:</label>
+        <input name="description" type="text" id="description">
+        
+        <label for="poster">Poster:</label>
+        <input name="poster" type="text" id="poster">
+        <button type="submit" id="submit"class="btn">Submit</button>
+    </form>
+</div>
         <div id="film">
             <p id="heading">List of available movies:</p>
             <ul>
