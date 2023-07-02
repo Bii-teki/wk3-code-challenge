@@ -1,4 +1,4 @@
-    
+
 
 
 function fetchData() {
@@ -18,6 +18,7 @@ function fetchData() {
         poster: e.target.poster.value
         
      }
+   
      postFilm(filmObj)
     }
     function postFilm(filmObj) {
@@ -35,6 +36,7 @@ function fetchData() {
     }
    
     function deleteFilm(id) {
+        
         fetch(`http://localhost:3000/films/${id}`,{
         method: 'delete',
         headers:{
@@ -52,6 +54,11 @@ function fetchData() {
      .then(json => getData(json))
      //  requesting data from the server
      // ass
+
+    //  function editFilm(id) {
+    //     let editor = document.querySelector('#')
+        
+    //  }
    
      function getData(films) {
            // forEach iterates through an array of names 
@@ -60,10 +67,21 @@ function fetchData() {
             const p = document.createElement('p') 
             const bt = document.createElement('button') 
             bt.id =char.id
-            p.addEventListener('click', ()=>{
+            bt.className= 'btn-danger'
+            bt.textContent="Delete"
+            bt.addEventListener('click', ()=>{
                 main.remove()
 
                 deleteFilm(char.id)
+            })
+
+            const bt1 = document.createElement('button') 
+            bt1.id =char.id
+            bt1.className= 'btn-danger'
+            bt1.textContent="Edit"
+            bt1.addEventListener('click', ()=>{              
+
+                editFilm(char.id)
             })
             // we have create variable p and assigne all the names in an array
             // we have created variable button and assigned all the id in an array
@@ -71,24 +89,12 @@ function fetchData() {
             p.id=char.id;
             p.addEventListener('click', displayFilmsDetails)
             //we have added an event to names and buttuns where one can view animal
-            bt.textContent="view"
+            
             main.append(p);
             bt.id=char.id;      
-            p.append(bt)
+            p.appendChild(bt)
+            p.append(bt1)
      
-            const bt_stylying={
-           display: "block",
-           color: "white",
-           width: "100px",
-           borderRadius: '20px',
-           backgroundColor: '#444',
-           height: "26px"
-           }
-     
-     //Object.assign():
-           Object.assign(bt.style, bt_stylying);
-           
-          
           }); 
 
      
@@ -114,20 +120,56 @@ function createFilm(films) {
         l2.append(p1)
         const l3 = document.getElementById("run");
         const p2 = document.createElement('p') 
-        l2.innerHTML=films.title
+        l3.innerHTML=films.runtime
         l3.append(p2)
         const l4 = document.getElementById("show");
         const p3 = document.createElement('p') 
         l4.innerHTML=films.showtime
         l4.append(p3)
-        const l5 = document.getElementById("showtime");
+        const l6 = document.getElementById("sell");
+        const p4 = document.createElement('p') 
+        l6.innerHTML=(films.capacity - films.tickets_sold)
+        l6.append(p4)
+        l6.id= films.id
+        // l6.addEventListener('click',  handleSales(id))
+
+        const l5 = document.getElementById("available");
         const image = document.createElement('img') 
         image.src = films.poster
         l5.append(image)
+       
 
    
 }
 
+
+// function handleSales(e) {
+   
+//     // let  vote = Number.parseInt(e.target.textContent) 
+//     // let  vote = Number.parseInt(e.target.textContent) 
+//     //   // e.target refers to the clicked votes element
+//     //   // we use if statement to vote by checking if the has already voted 
+//     //   // or wants to uncheck his vote
+//     //   if(vote===)
+//     //   {
+//     //   vote += 1  
+//     //   e.target.textContent = vote + "uncheck"
+//     //   }
+
+//     //   else if(vote===1){
+//     //   vote -= 1  
+//     //   e.target.textContent = vote + "vote"
+//     //   }
+//     //   else if(vote==="click to uncheck"){
+//     //   vote=0
+//     //   }
+//     //   // counting total votes
+//     //   let title = document.createElement('p')
+//     //   title.innerHTML = 'total votes' + ' ' + vote ;
+//     //   votes.append(title)
+//     //   let count = document.createElement('p')
+//     //   count.innerHTML = vote;
+// }
 
 }
 window.onload=fetchData
