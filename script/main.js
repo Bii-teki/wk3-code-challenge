@@ -4,8 +4,9 @@
 function fetchData() {
    
     let former = document.getElementById('new-film').addEventListener('submit', handleSubmit)
-
+// adds an event to form
     function handleSubmit(e) {
+// creates  an object  called  filmObj
         e.preventDefault()
         let filmObj ={
         id: e.target.id.value,
@@ -21,7 +22,8 @@ function fetchData() {
    
      postFilm(filmObj)
     }
-    function postFilm(filmObj) {
+    // post function
+     function postFilm(filmObj) {
         fetch('http://localhost:3000/films',{
         method: 'post',
         headers: {
@@ -35,6 +37,7 @@ function fetchData() {
     
     }
    
+    // function to delete specific item in the list
     function deleteFilm(id) {
         
         fetch(`http://localhost:3000/films/${id}`,{
@@ -53,12 +56,7 @@ function fetchData() {
        // handle the response
      .then(json => getData(json))
      //  requesting data from the server
-     // ass
 
-    //  function editFilm(id) {
-    //     let editor = document.querySelector('#')
-        
-    //  }
    
      function getData(films) {
            // forEach iterates through an array of names 
@@ -83,12 +81,12 @@ function fetchData() {
 
                 editFilm(char.id)
             })
-            // we have create variable p and assigne all the names in an array
+            // we have create variable p and assign all the names in an array
             // we have created variable button and assigned all the id in an array
             p.textContent = char.title;
             p.id=char.id;
             p.addEventListener('click', displayFilmsDetails)
-            //we have added an event to names and buttuns where one can view animal
+            //we have added an event to names and button where one can view films
             
             main.append(p);
             bt.id=char.id;      
@@ -99,21 +97,25 @@ function fetchData() {
 
      
      }
-function displayFilmsDetails(e) {
 
+function displayFilmsDetails(e) {
+    // assign a variable to a value passed from an event
     const id = e.target.id
     fetchFilms(id)
 }
 
 function fetchFilms(id) {
+    // fetch films using id
     fetch(`http://localhost:3000/films/${id}`)
     .then(response => response.json())
+    // handle the response
     .then(json=> createFilm(json))
+    //  requesting data from the server
     
 }
 
 function createFilm(films) {   
-    
+        //we create elements and assign values from fetch 
         const l2 =document.getElementById("film-details")
         const p1 = document.createElement('p')
         l2.innerHTML=films.title
@@ -126,12 +128,32 @@ function createFilm(films) {
         const p3 = document.createElement('p') 
         l4.innerHTML=films.showtime
         l4.append(p3)
+
+        
+        count = (films.capacity - films.tickets_sold) 
         const l6 = document.getElementById("sell");
         const p4 = document.createElement('p') 
-        l6.innerHTML=(films.capacity - films.tickets_sold)
+        p4.innerHTML= count 
         l6.append(p4)
-        l6.id= films.id
-        // l6.addEventListener('click',  handleSales(id))
+        p4.id= films.id
+       
+        p4.addEventListener('click',  ()=>{
+            count = (films.capacity - films.tickets_sold) 
+           //we callculate the available tickets
+          // decrement the value by one and display sold
+          
+           counter = count-=1
+           console.log(counter)
+           p4.innerHTML= counter
+           const sold = document.getElementById("sold");
+      let title = document.createElement('p')
+      title.innerHTML = "Sold";
+      sold.append(title)
+
+
+        })        
+       
+        
 
         const l5 = document.getElementById("available");
         const image = document.createElement('img') 
@@ -142,34 +164,7 @@ function createFilm(films) {
    
 }
 
+  }
 
-// function handleSales(e) {
-   
-//     // let  vote = Number.parseInt(e.target.textContent) 
-//     // let  vote = Number.parseInt(e.target.textContent) 
-//     //   // e.target refers to the clicked votes element
-//     //   // we use if statement to vote by checking if the has already voted 
-//     //   // or wants to uncheck his vote
-//     //   if(vote===)
-//     //   {
-//     //   vote += 1  
-//     //   e.target.textContent = vote + "uncheck"
-//     //   }
 
-//     //   else if(vote===1){
-//     //   vote -= 1  
-//     //   e.target.textContent = vote + "vote"
-//     //   }
-//     //   else if(vote==="click to uncheck"){
-//     //   vote=0
-//     //   }
-//     //   // counting total votes
-//     //   let title = document.createElement('p')
-//     //   title.innerHTML = 'total votes' + ' ' + vote ;
-//     //   votes.append(title)
-//     //   let count = document.createElement('p')
-//     //   count.innerHTML = vote;
-// }
-
-}
 window.onload=fetchData

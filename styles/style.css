@@ -1,3 +1,6 @@
+em{
+  color: brown;
+}
 .navbar {
   display: flex;
   align-items: center;
@@ -61,12 +64,7 @@
   width: auto;
 
 }
-/* .img{
-  vertical-align: middle;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%; */
-/* } */
+
 .img{
   cursor: pointer;
   display: flex;
@@ -82,7 +80,7 @@ margin-left: 80px;
   height: 900px;
   padding: 10px;
   margin: 5px;
-  background-color: #cccccc;
+  background-color: #cabfbf;
   text-align: center;
 }
 .container {
